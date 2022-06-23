@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="/admin/userMapper">
+	<select id="login_check" parameterType="hashmap"  resultType="hashmap">
+		select 
+			*,
+			case when
+			pwdt >= cast(date_format(DATE_ADD(NOW(), INTERVAL +6 MONTH),'%Y%m%d%H%m%s') as char)  then 1 ELSE 0 END AS day_result
+		from tbl_user where 
+			pw = #{login_pw} 
+			and id = #{login_id} 
+	</select>
+	
+	<select id="change_pw" parameterType="hashmap"  resultType="hashmap">
+		select 
+			*, 
+			case when
+			NOW() >= cast(date_format(DATE_ADD(pwdt, INTERVAL +1 DAY),'%Y%m%d%H%m%s') as char)  then 1 ELSE 0 END AS day_result
+		from tbl_user where 
+			pw = '${password1}' 
+			limit 1
+	</select>
+	
+	<select id="upchange_pw" parameterType="hashmap"  resultType="hashmap">
+		update tbl_user 
+		set 
+		pw   = '${password2}',
+		pwdt =  NOW()+0
+		where idx = '1'
+	</select>
+
+	<update id="addLockCnt" parameterType="hashmap">
+		update tbl_user
+		set
+		lock_cnt =lock_cnt+1,
+		lock_time= now()+0
+		where id = '${id}'
+	</update>
+	
+	<update id="resetLockCnt" parameterType="hashmap">
+		update tbl_user
+		set
+		lock_cnt ='0',
+		lock_time ='0'
+		where id = '${id}'
+	</update>
+	
+	<select id="getLockInfo" parameterType="hashmap"  resultType="hashmap">
+		select 
+			*,
+			cast(DATE_FORMAT( NOW()+0, '%Y%m%d%H%i%s' ) - DATE_FORMAT( lock_time, '%Y%m%d%H%i%s' ) as char) AS lock_sec
+		from  tbl_user where id = '${id}'
+	</select>
+	
+	<select id="check_used_pw" parameterType="hashmap"  resultType="hashmap">	
+		SELECT COUNT(*) AS cnt FROM tbl_pw_log 
+		WHERE used_pw= '${pw}'
+		ORDER BY idx DESC LIMIT 1
+	</select>
+	
+	<insert id="ins_pwlog" parameterType="hashmap">
+		INSERT into tbl_pw_log
+		(
+			used_pw, submit_date
+		)
+			VALUES
+		(
+		    '${pw}', now()+0 
+		)
+	</insert>
+</mapper>

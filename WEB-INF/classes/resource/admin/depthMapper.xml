@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="/admin/depthMapper">
+
+	<!-- depth list 조회 -->
+	<select id="getEstimateCount" parameterType="hashmap" resultType="hashmap">
+		select count(*) as CNT from tbl_cate where 1
+		<if test="search_type eq 'cate1'.toString()">
+			AND cate1 LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'cate2'.toString()">
+			AND cate2 LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			and (cate1 LIKE '%${search_name}%' or cate2 LIKE '%${search_name}%')
+		</if>
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+	</select>
+	<select id="getestimatelist" parameterType="hashmap" resultType="hashmap">
+		select * from tbl_cate where 1
+		<if test="search_type eq 'cate1'.toString()">
+			AND cate1 LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'cate2'.toString()">
+			AND cate2 LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			and (cate1 LIKE '%${search_name}%' or cate2 LIKE '%${search_name}%')
+		</if>
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+		<if test="!order_by.equals('') and !sort_type.equals('')">
+	   		order by ${sort_type} ${order_by}
+	   	</if>
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	
+	<!--  depth list 등록 -->
+	<insert id="insEstimatelist" parameterType="hashmap">
+		INSERT into tbl_cate
+		(
+			cate1, cate2, sort, submit_date
+
+		)
+			VALUES
+		(
+			'${cate1}', '${cate2}', '${sort}', now()+0
+		)
+	</insert>
+	
+	<!-- 대분류 드랍박스  -->
+	<select id="getCate1" parameterType="hashmap"  resultType="hashmap">
+		SELECT idx, cate1 FROM tbl_cate group by cate1
+	</select>
+	<select id="getEstimateSort" parameterType="hashmap"  resultType="string">
+		select sort from tbl_cate where cate1 = '${cate1}' limit 1
+	</select>
+	
+	<!-- sort  --> 
+	<select id="getSort" parameterType="hashmap"  resultType="hashmap">
+		SELECT sort FROM tbl_cate where cate1 = '${cate1}' limit 1
+	</select>
+	
+	<!-- 게시글 단일 조회 -->
+	<select id="getDepthListOne" parameterType="hashmap" resultType="hashmap">
+		SELECT * FROM tbl_cate where idx = '${idx}'
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="editEstimateList" parameterType="hashmap">
+		UPDATE tbl_cate set
+				cate1 = '${cate1}',
+				cate2 = '${cate2}',
+				sort  = '${sort}'
+			where
+				idx = '${idx}'
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delEstimateList" parameterType="hashmap">
+		DELETE FROM tbl_cate where idx = '${idx}'
+	</delete>
+</mapper>

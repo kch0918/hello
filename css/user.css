@@ -1,0 +1,149 @@
+/****** 로그인 ******/
+
+.login_wrap {
+    width: 100%;
+    height: 100%;
+    background: #f8f8f8;
+    position: relative;
+    overflow: hidden;
+}
+
+.page_login {
+    width: 100%;
+    max-width: 822px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.page_login .inner {
+    text-align: center;
+    padding: 80px 215px 88px;
+    background: #fff;
+    box-sizing: border-box;
+    border-radius: 26px;
+    border: 1px solid #22b2e9;
+}
+
+.inner form {
+    margin-bottom: 0;
+}
+
+.page_login img {
+    padding-bottom: 49px;
+    max-width: 130px;
+}
+
+.page_login .inner+a {
+    font-size: 14px;
+    color: #3a3a3a;
+    text-align: center;
+    width: 100%;
+    margin-top: 15px;
+    display: table;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#loginForm input {
+    display: block;
+    width: 100%;
+    height: 60px;
+    padding: 0 25px;
+    box-sizing: border-box;
+    border: 1px solid #d9d9d9;
+    margin-top: 21px;
+    font-size: 18px;
+    letter-spacing: -0.18px;
+    color: rgba(17, 17, 17, 0.52);
+    line-height: 27px;
+    border-radius: 43px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+}
+
+#loginForm input:last-child {
+    margin-top: 61px;
+    border: 0;
+}
+
+#loginForm input#login_pw {
+    margin-bottom: 20px;
+}
+
+.btn_login {
+    background-color: #22b2e9 !important;
+    color: #fff !important;
+    border-radius: 43px;
+    font-family: 'Noto Sans KR', sans-serif !important;
+    font-size: 16px !important;
+    letter-spacing: -0.16px !important;
+    cursor: pointer;
+}
+
+.chk-wrap input[type="checkbox"] {
+    display: none !important;
+    position: relative;
+    z-index: -9999;
+}
+
+.chk-wrap {
+    text-align: left;
+    padding-left: 14px;
+    z-index: 1;
+}
+
+.chk-wrap input[type="checkbox"]+label {
+    cursor: pointer;
+    margin-right: 31px;
+}
+
+.chk-wrap input[type="checkbox"]+label {
+    font-family: 'NanumSquare', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #010101;
+}
+
+.chk-wrap input[type="checkbox"]+label span {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #dfe5ee;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 9px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.chk-wrap input[type="checkbox"]:checked+label span {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: #36b4e5 url(../img/check.png) no-repeat center;
+    background-size: auto;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 33px;
+    box-shadow: 0.5px 3px 10px 0 rgba(222, 222, 222, 0.16);
+    background-color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+}
+
+.footer span {
+    font-size: 11px;
+    letter-spacing: 0.28px;
+    color: rgba(0, 0, 0, 0.48);
+    line-height: 33px;
+}

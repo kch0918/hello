@@ -1,0 +1,250 @@
+.table-top{
+	padding:20px 0 30px;
+}
+.title{
+	margin-bottom:30px;
+}
+.title h2{
+	font-size:35px;
+	color:#000;
+}
+.btn{
+	padding:15px;
+	min-width:156px;
+	text-align:Center;
+	font-size:15px;
+	display:inline-block;
+	border-radius:30px;
+}
+.btn01{
+	background:#ed174d;
+	color:#fff;
+	border:1px solid #ed174d;
+}
+.btn02{
+	background:#fff;
+	color:#000;
+	border:1px solid #e0e0e0;
+}
+input, select, textarea{
+	height:42px;
+	line-height:42px;
+	border:1px solid #f0f0f0;
+	border-radius:20px;
+	padding:0 15px;
+	display:inline-block;
+}
+input[type="file"]{
+	width:100%;
+	border:0;
+	border-radius:0;
+    padding: 10px;
+    cursor:pointer;
+}
+select{
+	 -webkit-appearance: none; -moz-appearance: none;appearance: none; 
+	background:url(/img/icon_down.png) no-repeat 85% center;
+}
+textarea{
+	min-height:250px;
+	height:auto;
+	line-height:1.6;
+	width:100%;
+	padding:15px;
+}
+.search input, .search select, textarea{
+	-webkit-box-shadow: -4px 5px 15px 4px rgba(235,235,235,0.45);
+    -o-box-shadow: -4px 5px 15px 4px rgba(235,235,235,0.45);
+    -moz-box-shadow: -4px 5px 15px 4px rgba(235,235,235,0.45);
+    box-shadow: -4px 5px 15px 4px rgba(235,235,235,0.45);
+}
+.search input[type="text"]{
+	width:68%;
+}
+.search {
+	position:relative;
+	max-width:506px;
+	width:100%;
+	float:right;
+}
+.search form{
+	font-size:0;
+}
+.search-btn{
+	position:Absolute;
+	right:0;
+	top:0;
+	width:108px;
+	height:100%;
+	background:#000000;
+	color:#fff;
+	border-radius:0 30px 30px 0;
+}
+.search select{
+	width:30%;
+	margin-right:2%;
+}
+.text-right{
+	text-align:Right;
+}
+.page_num{
+	margin:65px auto;
+	text-align:center;
+}
+.page_num a{
+	display:inline-block;
+	vertical-align:top;
+	color:#757575;
+	font-size:16px;
+	height:20px;
+	line-height:20px;
+	position:relative;
+	margin:0 15px;
+}
+.page_num a.active{
+	color:#ed174d;
+	font-weight:500;
+	border-bottom:1px solid #ed174d;
+}
+.mod-btn{
+	color:#9da9b3;
+	padding:5px 2px;
+	position:relative;
+}
+ .mod-btn + .mod-btn:before{
+	content:"";
+	display:block;
+	width:1px;
+	height:14px;
+	position:absolute;
+	left:-2px;
+	top:50%;
+	margin-top:-7px;
+	background:#9da9b3;
+ }
+ .list-edit-wrap{
+	position:fixed;
+	top:0; left:0; right:0;
+	width:100%; height:100%;
+	background:rgba(0,0,0,0.65);
+	display:none; 
+	z-index: 1000;
+}
+.list-edit{
+    background-color:white;
+    padding: 50px 30px;
+    text-align: center; 
+    position: relative;
+}
+.list-edit .txt {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+.list-edit .close {
+    width: 37px;
+    height: 37px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: url('/img/icon_close.png') no-repeat center;    
+}
+.btn-wr{
+	margin:50px auto;
+}
+.btn-wr a + a{
+	margin-left:15px;
+}
+.add-table table tr > td:first-child{
+	font-weight:700;
+	background:#f9f9f9;
+	width:250px;
+}
+.add-table select{
+	width:250px;
+}
+.add-table input[type="text"]{
+	width:400px;
+}
+input[type="checkbox"]{
+	vertical-align:middle;
+	margin:0 5px 0 10px;
+}
+.add-table td{
+	text-align:left;
+	padding:10px 30px;
+}
+.add-table img, .add-table span{
+	vertical-align:baseline;
+}
+.add-table img + span{
+	margin-left:10px;
+}
+.add-table span input[type="file"]{
+	width:auto;
+}
+.com-table{
+	margin-top:50px;
+    border-top: 2px solid #000000;
+}
+.com-table h3 {
+    font-size: 18px;
+    padding:50px 10px 30px;
+}
+.title{
+	text-align:left;
+}
+.list-table th{
+	cursor:pointer;
+    white-space: nowrap;
+}
+.list-table th img{
+	vertical-align:-2px;
+	margin-left:10px;
+}
+.tel{
+	white-space:nowrap;
+}
+.list-table select{
+	padding:0 25px 0 15px;
+}
+.filebox{
+	bordeR: 1px solid #b7b7b7;
+}
+.filebox input[type="file"] { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; } 
+.filebox label {
+    cursor: pointer;
+    padding: 15px;
+    display: inline-block;
+    width: 200px;
+	text-align:center;
+	color:#252525;
+	font-size:16px;
+	font-weight:700;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.exsave-btn{
+	position:Absolute;
+	right:0;
+	top:0;
+	width:70px;
+	height:100%;
+	cursor:pointer;
+	border-radius: 0;
+}
+.search-wr {
+    max-width: 294px;
+    margin: 0 auto;
+    position: Relative;
+    padding-right: 74px;
+    border-radius: 30px;
+    overflow: hidden;
+    bordeR: 1px solid #ddd;
+    display: inline-block;
+	vertical-align:top;
+}
+.table-top a{
+	margin-left: 5px;
+}

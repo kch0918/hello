@@ -1,0 +1,42 @@
+#privacy-sec01, #site-sec01 {
+	position: relative;
+    max-width: 1325px;
+    margin: 0 auto;
+    padding: 100px 30px;
+}
+#privacy-sec01 h3 {
+	word-break:keep-all;
+	font-size: 20px;
+    line-height: 1.1em;
+    margin-bottom: 8px;
+    margin-top: 1.5em;
+}
+#privacy-sec01 p {
+	word-break:keep-all;
+}
+#privacy-sec01 table {
+    width: 100%;
+    text-align: center;
+    border-top: 2px solid #333;
+    border-bottom: 1px solid #262626;
+    margin: 5px 0 30px;
+    border-collapse: collapse;
+}
+#privacy-sec01 table thead {
+
+}
+#privacy-sec01 table thead th {
+	padding: 9px 12px;
+	text-align:center;
+	background:#eee;
+	letter-spacing: -2px;
+	word-break:keep-all;
+}
+#privacy-sec01 table tbody {
+
+}
+#privacy-sec01 table tbody td {
+	font-size: 13px;
+    padding: 9px 12px;
+	word-break:keep-all;
+}

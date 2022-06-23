@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'LGSmHaL';
+  font-style: normal;
+  font-weight: 100;
+  src: url(../font/LGSmHaL.eot);
+  src: local('LGSmHaL'),
+       url(/font/LGSmHaL.eot?#iefix) format('embedded-opentype'),
+       url(/font/LGSmHaL.woff) format('woff'),
+       url(/font/LGSmHaL.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'LGSmHaR';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/font/LGSmHaR.eot);
+  src: local('LGSmHaR'),
+       url(/font/LGSmHaR.eot?#iefix) format('embedded-opentype'),
+       url(/font/LGSmHaR.woff) format('woff'),
+       url(/font/LGSmHaR.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'LGSmHaSB';
+  font-style: bold;
+  font-weight: 700;
+  src: url(../font/LGSmHaSB.eot);
+  src: local('LGSmHaSB'),
+       url(/font/LGSmHaSB.eot?#iefix) format('embedded-opentype'),
+       url(/font/LGSmHaSB.woff) format('woff'),
+       url(/font/LGSmHaSB.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'LGSmHaB';
+  font-style: bold;
+  font-weight: 900;
+  src: url(/font/LGSmHaB.eot);
+  src: local('LGSmHaB'),
+       url(/font/LGSmHaB.eot?#iefix) format('embedded-opentype'),
+       url(/font/LGSmHaB.woff) format('woff'),
+       url(/font/LGSmHaB.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'URW DIN';
+  font-style: normal;
+  font-weight: 100;
+  src: url(/font/URWDIN-Light.eot);
+  src: local('URWDIN'),
+	   local('URW DIN'),
+       url(/font/URWDIN-Light.eot?#iefix) format('embedded-opentype'),
+       url(/font/URWDIN-Light.woff) format('woff'),
+       url(/font/URWDIN-Light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'URW DIN';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/font/URWDIN-Regular.eot);
+  src: local('URWDIN'),
+	   local('URW DIN'),
+       url(/font/URWDIN-Regular.eot?#iefix) format('embedded-opentype'),
+       url(/font/URWDIN-Regular.woff) format('woff'),
+       url(/font/URWDIN-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'URW DIN';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../font/URWDIN-Bold.eot);
+  src: local('URWDIN'),
+	   local('URW DIN'),
+       url(/font/URWDIN-Bold.eot?#iefix) format('embedded-opentype'),
+       url(/font/URWDIN-Bold.woff) format('woff'),
+       url(/font/URWDIN-Bold.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 100;
+    src: url(/font/NanumSquareL.eot);
+    src: local('Nanum Square Light'), local('NanumSquareL'),
+        url(/font/NanumSquareL.eot?#iefix) format('embedded-opentype'),
+        url(/font/NanumSquareL.woff2) format('woff2'),
+        url(/font/NanumSquareL.woff) format('woff'),
+        url(/font/NanumSquareL.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/font/NanumSquareR.eot);
+    src: local('Nanum Square Regular'), local('NanumSquareR'),
+        url(/font/NanumSquareR.eot?#iefix) format('embedded-opentype'),
+        url(/font/NanumSquareR.woff2) format('woff2'),
+        url(/font/NanumSquareR.woff) format('woff'),
+        url(/font/NanumSquareR.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'NanumSquaref';
+    font-style: bold;
+    font-weight: 700;
+    src: url(/font/NanumSquareB.eot);
+    src: local('Nanum Square Bold'), local('NanumSquareB'),
+        url(/font/NanumSquareB.eot?#iefix) format('embedded-opentype'),
+        url(/font/NanumSquareB.woff2) format('woff2'),
+        url(/font/NanumSquareB.woff) format('woff'),
+        url(/font/NanumSquareB.ttf) format('truetype');
+}

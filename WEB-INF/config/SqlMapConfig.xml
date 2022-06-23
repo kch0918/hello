@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>
+		<!-- common -->
+		<mapper resource="resource/admin/adminMapper.xml" />
+		<mapper resource="resource/admin/mainMapper.xml" />
+		<mapper resource="resource/admin/visionMapper.xml" />
+		<mapper resource="resource/admin/depthMapper.xml" />
+		<mapper resource="resource/admin/requestMapper.xml" />
+		<mapper resource="resource/admin/adquestMapper.xml" />
+		<mapper resource="resource/admin/portfolioMapper.xml" />
+		<mapper resource="resource/admin/noticeMapper.xml" />
+		<mapper resource="resource/admin/adcategoryMapper.xml" />
+		<mapper resource="resource/admin/userMapper.xml" />
+		<mapper resource="resource/web/selfMapper.xml" />
+		<mapper resource="resource/web/webMapper.xml" />
+	</mappers>
+</configuration> 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="/web/selfMapper">
+	<select id="getCate" parameterType="hashmap"  resultType="hashmap">
+		select idx, cate1, sort from tbl_cate group by cate1 order by sort
+	</select>
+	<select id="getCateList" parameterType="hashmap"  resultType="hashmap">
+		select 
+		tbl_vision.*,
+		cate1, cate2, 
+		(select count(cate) from tbl_vision where cate = tbl_cate.idx) as cnt
+		from tbl_vision, tbl_cate 
+		where tbl_vision.cate = tbl_cate.idx 
+		and tbl_cate.cate1 = (select cate1 from tbl_cate where idx = '${cate}')
+		order by sort
+	</select>
+	<select id="getCatePay" parameterType="hashmap"  resultType="hashmap">
+		select * from tbl_vision where
+		cate in 
+		(
+			select idx from tbl_cate where 
+			cate1 = (select cate1 from tbl_cate where idx = '${idx}')
+		)
+	</select>
+	<select id="getVision" parameterType="hashmap"  resultType="hashmap">
+		select * from tbl_vision where idx in (${de_idx_arr}) and cate in (select idx from tbl_cate where cate1 = (select cate1 from tbl_cate where idx = '${idx}')) order by sort
+	</select>
+	<select id="getVisionMin" parameterType="hashmap"  resultType="hashmap">
+		select * from tbl_vision where idx in (${de_idx_arr}) and cate in (select idx from tbl_cate where cate1 = (select cate1 from tbl_cate where idx = '${idx}')) order by min_pay limit 1
+	</select>
+	<select id="getVisionFin" parameterType="hashmap"  resultType="hashmap">
+		select cate1, cate2, tbl_vision.* from tbl_vision, tbl_cate where tbl_vision.cate = tbl_cate.idx and tbl_vision.idx = '${idx}'
+	</select>
+	<insert id="sendRequest" parameterType="hashmap">
+		insert into tbl_request
+		set
+		name = '${user_name}',
+		tel = '${user_tel}',
+		email = '${user_email}',
+		answer = '${user_answer}',
+		`contents` = '${user_contents}',
+		agree = 'Y',
+		`condition` = '대기중',
+		hope_item = '${user_hope_item}',
+		tm_agree = '${tm_agree}',
+		dm_agree = '${dm_agree}',
+		email_agree = '${email_agree}',
+		submit_date = now()+0
+	</insert>
+</mapper>

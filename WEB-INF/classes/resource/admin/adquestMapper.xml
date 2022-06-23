@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="/admin/adquestMapper">
+
+	<!-- list 조회 -->
+	<select id="getAdquestCount" parameterType="hashmap" resultType="hashmap">
+		select count(*) as CNT from tbl_adquest where 1
+		<if test="search_type eq 'title'.toString()">
+			AND title LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'write'.toString()">
+			AND write LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'tel'.toString()">
+			AND tel LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			and (title LIKE '%${search_name}%' or `write` LIKE '%${search_name}%' or tel LIKE '%${search_name}%')
+		</if>
+		<if test="!tm_agree.equals('')">
+			and tbl_adquest.tm_agree = '${tm_agree}'
+		</if>
+		<if test="!dm_agree.equals('')">
+			and tbl_adquest.dm_agree = '${dm_agree}'
+		</if>
+		<if test="!email_agree.equals('')">
+			and tbl_adquest.email_agree = '${email_agree}'
+		</if>
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+	</select>
+	
+	<select id="getadquestList" parameterType="hashmap" resultType="hashmap">
+		select * from tbl_adquest where 1
+		<if test="search_type eq 'title'.toString()">
+			AND title LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'write'.toString()">
+			AND write LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'tel'.toString()">
+			AND tel LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			AND (title LIKE '%${search_name}%' or `write` LIKE '%${search_name}%' or tel LIKE '%${search_name}%')
+		</if>
+		<!-- 선택 동의 -->
+		<if test="!tm_agree.equals('')">
+			and tbl_adquest.tm_agree = '${tm_agree}'
+		</if>
+		<if test="!dm_agree.equals('')">
+			and tbl_adquest.dm_agree = '${dm_agree}'
+		</if>
+		<if test="!email_agree.equals('')">
+			and tbl_adquest.email_agree = '${email_agree}'
+		</if> 
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+		<if test="!order_by.equals('') and !sort_type.equals('')">
+	   		order by ${sort_type} ${order_by}
+	   	</if>
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delAdquestList" parameterType="hashmap">
+			DELETE from tbl_adquest where idx = '${idx}'
+	</delete>
+	
+	<!-- 신한카드 -->
+	
+	<!-- list 조회 -->
+	<select id="getAdquestCount_sh" parameterType="hashmap" resultType="hashmap">
+		select count(*) as CNT from tbl_adquest_sh where 1
+		<if test="search_type eq 'title'.toString()">
+			AND title LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'write'.toString()">
+			AND write LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'tel'.toString()">
+			AND tel LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			and (title LIKE '%${search_name}%' or `write` LIKE '%${search_name}%' or tel LIKE '%${search_name}%')
+		</if>
+		<if test="!tm_agree.equals('')">
+			and tbl_adquest_sh.tm_agree = '${tm_agree}'
+		</if>
+		<if test="!dm_agree.equals('')">
+			and tbl_adquest_sh.dm_agree = '${dm_agree}'
+		</if>
+		<if test="!email_agree.equals('')">
+			and tbl_adquest_sh.email_agree = '${email_agree}'
+		</if>
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+	</select>
+	
+	<select id="getadquestList_sh" parameterType="hashmap" resultType="hashmap">
+		select * from tbl_adquest_sh where 1
+		<if test="search_type eq 'title'.toString()">
+			AND title LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'write'.toString()">
+			AND write LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'tel'.toString()">
+			AND tel LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			AND (title LIKE '%${search_name}%' or `write` LIKE '%${search_name}%' or tel LIKE '%${search_name}%')
+		</if>
+		<!-- 선택 동의 -->
+		<if test="!tm_agree.equals('')">
+			and tbl_adquest_sh.tm_agree = '${tm_agree}'
+		</if>
+		<if test="!dm_agree.equals('')">
+			and tbl_adquest_sh.dm_agree = '${dm_agree}'
+		</if>
+		<if test="!email_agree.equals('')">
+			and tbl_adquest_sh.email_agree = '${email_agree}'
+		</if> 
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+		<if test="!order_by.equals('') and !sort_type.equals('')">
+	   		order by ${sort_type} ${order_by}
+	   	</if>
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+</mapper>

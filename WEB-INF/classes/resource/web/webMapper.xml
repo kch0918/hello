@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="/web/webMapper">
+
+	<!-- list 조회 -->
+	<select id="getWebnoticetCount" parameterType="hashmap"  resultType="hashmap">
+		select count(*) as CNT from tbl_notice where is_show = 'Y' and is_imsi = 'N' and cate = '${cate}' 
+		and submit_date between concat(start_date, '000000') and concat(finish_date, '999999') 
+		<if test="!search_name.equals('')">
+			and (main_title like '%${search_name}%' or contents like '%${search_name}%')
+		</if>
+	</select>
+	<select id="getWebnoticetList" parameterType="hashmap"  resultType="hashmap">
+		select * from tbl_notice where is_show = 'Y' and is_imsi = 'N' and cate = '${cate}' 
+		and submit_date between concat(start_date, '000000') and concat(finish_date, '999999') 
+		<if test="!search_name.equals('')">
+			and (main_title like '%${search_name}%' or contents like '%${search_name}%')
+		</if>
+		order by is_top = 'Y' desc, sort
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	
+	<!-- 공지사항 이전 게시물 조회 -->
+	<select id="prevNotice" parameterType="hashmap" resultType="hashmap">
+	    SELECT idx from tbl_notice where idx <![CDATA[<]]> '${idx}' and cate='공지사항' order by idx desc limit 1		
+	</select>
+	
+	<!-- 공지사항 다음 게시물 조회 -->
+	<select id="nextNotice" parameterType="hashmap" resultType="hashmap">
+		SELECT idx from tbl_notice where idx <![CDATA[>]]> '${idx}' and cate='공지사항' order by idx limit 1		
+	</select>
+	
+	<!-- 이용안내 이전 게시물 조회 -->
+	<select id="prevInfo" parameterType="hashmap" resultType="hashmap">
+	    SELECT idx from tbl_notice where idx <![CDATA[<]]> '${idx}' and cate='이용안내' order by idx desc limit 1		
+	</select>
+	
+	<!-- 이용안내 다음 게시물 조회 -->
+	<select id="nextInfo" parameterType="hashmap" resultType="hashmap">
+		SELECT idx from tbl_notice where idx <![CDATA[>]]> '${idx}' and cate='이용안내' order by idx limit 1		
+	</select>
+	
+	<!-- 단일 조회 -->
+	<select id="getWebnoticetListOne" parameterType="hashmap"  resultType="hashmap"> 
+		SELECT * FROM tbl_notice where idx = '${idx}'
+	</select>
+	
+	<!-- 게시물 갯수  -->
+	<select id="getWebnoticeCount" parameterType="hashmap" resultType="hashmap">
+		SELECT count(*) as CNT from web_notice where 1
+	</select>
+	
+	<!-- list 조회 -->
+	<select id="getWebinfoList" parameterType="hashmap"  resultType="hashmap">
+		SELECT * FROM web_info
+			<if test="!searchName.equals('')">
+			where web_info.title LIKE '%${searchName}%'
+			</if>
+			<!--  <if test="!order_by.equals('') and !sort_type.equals('')">
+			order by ${sort_type} ${order_by} 
+			</if> 
+			limit #{s_rownum}, #{e_rownum} -->
+		order by web_info.submit_date desc
+	</select>
+	
+	<!-- 게시물 갯수  -->
+	<select id="getWebinfoCount" parameterType="hashmap" resultType="hashmap">
+		SELECT count(*) as CNT from web_info where 1
+	</select>
+	
+	<!-- 광고문의  -->
+	<insert id="insContact" parameterType="hashmap">
+		INSERT into tbl_adquest
+		(
+			title,			`write`,	 	 	tel,			email,
+			hope_item,		region,			contents,		`condition`,     attach,		 mark_agree,
+			tm_agree, 		dm_agree, 		email_agree,  	 submit_date
+		)
+			VALUES
+		(
+			'${title}',		 '${write}',	'${tel}', 			'${email}',
+			'${hope_item}',	 '${region}',	'${contents}', 		'대기중',        '${attach}',      '${mark_agree}',
+			'${tm_agree}',   '${dm_agree}',  '${email_agree}',   now()+0
+		)
+	</insert>
+	<select id="getconsulting" parameterType="hashmap"  resultType="hashmap">
+		select * from tbl_ad where is_show = 'Y' order by sort 
+	</select>
+	<select id="getPortfolioCount" parameterType="hashmap"  resultType="hashmap">
+		select count(*) as CNT from tbl_port where is_show = 'Y' and is_imsi = 'N' 
+		<if test="!search_type.equals('')">
+			and main_title = '${search_type}'
+		</if>
+	</select>
+	<select id="getPortfolio" parameterType="hashmap"  resultType="hashmap">
+		select * from tbl_port where is_show = 'Y' and is_imsi = 'N' 
+		<if test="!search_type.equals('')">
+			and main_title like '%${search_type}%'
+		</if>
+		order by is_top = 'Y' desc, sort
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	<select id="getMBanner" parameterType="hashmap"  resultType="hashmap">
+		select * from tbl_mbanner where is_show = 'Y' and is_imsi = 'N' 
+		and now()+0 between concat(start_date, '000000') and concat(finish_date, '999999') 
+		order by sort limit 1
+	</select>
+	<select id="getPopup" parameterType="hashmap" resultType="hashmap">
+		select 
+			* 
+		from tbl_popup where 
+			is_show = 'Y' 
+			and  now()+0 between concat(start_date, '000000') and concat(finish_date, '999999') 
+			order by sort
+	</select>
+	
+	<!-- 신한카드 광고문의  -->
+	<insert id="insContactSh" parameterType="hashmap">
+		INSERT into tbl_adquest_sh
+		(
+			title,			`write`,	 	 	tel,			email,
+			hope_item,		region,			contents,		`condition`,     attach,		 mark_agree,
+			tm_agree, 		dm_agree, 		email_agree,  	 submit_date
+		)
+			VALUES
+		(
+			'${title}',		 '${write}',	'${tel}', 			'${email}',
+			'${hope_item}',	 '${region}',	'${contents}', 		'대기중',     '${attach}',   '${mark_agree}',
+			'${tm_agree}',   '${dm_agree}',  '${email_agree}',   now()+0
+		)
+	</insert>
+	
+	<!-- 광고트렌드  -->
+	<select id="getTrendCount" parameterType="hashmap"  resultType="hashmap">
+		select count(*) as CNT from tbl_trend where is_show = 'Y' and is_imsi = 'N' 
+		<if test="!search_type.equals('')">
+			and main_title = '${search_type}'
+		</if>
+	</select>
+	
+	<select id="getTrend" parameterType="hashmap"  resultType="hashmap">
+		select * from tbl_trend where is_show = 'Y' and is_imsi = 'N' 
+		<if test="!search_type.equals('')">
+			and main_title like '%${search_type}%'
+		</if>
+		order by is_top = 'Y' desc, sort
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	
+	<!-- 광고트렌드 view -->
+	<select id="getWebTrendListOne" parameterType="hashmap"  resultType="hashmap"> 
+		SELECT * FROM tbl_trend where idx = '${idx}'
+	</select>
+	
+	<!-- 이전 게시물 조회 -->
+	<select id="prevTrend" parameterType="hashmap" resultType="hashmap">
+	    SELECT idx from tbl_trend where idx <![CDATA[<]]> '${idx}' order by idx desc limit 1		
+	</select>
+	
+	<!-- 다음 게시물 조회 -->
+	<select id="nextTrend" parameterType="hashmap" resultType="hashmap">
+		SELECT idx from tbl_trend where idx <![CDATA[>]]> '${idx}' order by idx limit 1		
+	</select>
+</mapper>

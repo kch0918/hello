@@ -1,0 +1,138 @@
+#consult-sec01 {
+	position: relative;
+    max-width: 1325px;
+    margin: 0 auto;
+    padding: 100px 30px;
+}
+
+.consult_tab {
+
+}
+.consult_tab h3 {
+	font-family: 'LGSmHaSB', sans-serif;
+    font-size: 49px;
+    color: #181818;
+    letter-spacing: -2.5px;
+}
+.consult_tab ul {
+	position: relative;
+    font-size: 0;
+	margin:50px 0;
+}
+.consult_tab ul > li {
+	display:inline-block;
+	position: relative;
+    width:18%;
+    margin-right:2.5%;
+    margin-bottom: 10px;
+    font-family: 'LGSmHaR', sans-serif;
+    font-size: 17px;
+    color: #555 !important;
+    padding: 11px 10px;
+    border: 1px solid #f5f5f5;
+    border-radius: 30px;
+    text-align: center;
+    cursor:pointer;
+}
+.consult_tab ul > li:nth-of-type(5n) {
+	margin-right:0;
+}
+.consult_tab ul > li.on {
+	background: #ed174d;
+    color: #fff !important;
+}
+.consult_tab p{
+	margin-top:0.5em;
+}
+/*
+.consult_tab ul > li:first-child {
+	display: table;
+    position: absolute;
+    width: 17%;
+    height: 100%;
+    left: 0;
+    padding: 0 10px;
+}
+.consult_tab ul > li > a {
+	display: block;
+	font-family: 'LGSmHaR', sans-serif;
+    font-size: 17px;
+    color: #555 !important;
+    padding: 11px 10px;
+    border: 1px solid #f5f5f5;
+    border-radius: 30px;
+}
+.consult_tab ul > li:first-child > a {
+	display: table-cell;
+    vertical-align: middle;
+    color: #333 !important;
+    background: #f5f5f5;
+    border: 0;
+}
+.consult_tab ul > li:nth-child(7), .consult_tab ul > li:nth-child(8), .consult_tab ul > li:nth-child(9), .consult_tab ul > li:nth-child(10), .consult_tab ul > li:nth-child(11) {
+	margin-bottom:0;
+}
+*/
+
+.consult_box {
+	display:none;
+}
+.consult_box.on {
+	display:block;
+}
+
+
+#consult-sec03 {
+	display:none;
+}
+#consult-sec04 {
+    position: relative;
+	max-width: 1400px;
+    padding: 50px 50px;
+	margin: 0 auto;
+}
+#consult-sec04 .consult_bt.bottom_ad {
+	display: table;
+    width: 100%;
+    text-align: center;
+}
+#consult-sec04 .consult_bt.bottom_ad > p, #consult-sec04 .consult_bt.bottom_ad > div {
+	position:relative;
+	display: table-cell;
+    vertical-align: middle;
+}	
+#consult-sec04 .consult_bt.bottom_ad > div {
+	font-size:0;
+}
+#consult-sec04 .consult_bt.bottom_ad .btn_group button:last-child {
+	margin-right:0;
+}
+#consult-sec04 .consult_bt.bottom_ad button:first-child {
+	background: #ed174d url('/img/web/img/icon_arrow.png')no-repeat 80% center;
+    background-size: 15px 10px;
+}
+#consult-sec04 .consult_bt.bottom_ad button:last-child {
+	background: #fff url('/img/web/img/icon_arrow_p.png')no-repeat 80% center;
+    color: #ed174d;
+    border: 1px solid #ed174d;
+    background-size: 15px 10px;
+
+}
+#consult-sec04 .consult_bt.bottom_ad button:last-child > a {
+	color: #ed174d;
+}
+
+#consult-sec04 .consult_bt.bottom_ad button:last-child:hover > a {
+	color: #ed174d !important;
+}
+
+#consult-sec04 .ad_txt:after {
+    content: '';
+    position: absolute;
+    right: -55px;
+    top: 50%;
+    width: 180px;
+    height: 1px;
+    background-color: rgba(0,0,0,0.2);
+
+}

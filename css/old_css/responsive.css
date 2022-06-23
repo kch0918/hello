@@ -1,0 +1,9 @@
+body,html{
+	min-width:1280px;
+}
+
+@media screen and (max-width: 1400px) {
+   .gnb-ul li{
+		margin:0 30px;
+   }
+}

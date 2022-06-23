@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="/admin/requestMapper">
+
+	<!-- list 조회 -->
+	<select id="getrequestList" parameterType="hashmap"  resultType="hashmap">
+		SELECT * FROM tbl_request where 1
+		<if test="!search_type.equals('')">
+			<if test="!searchName.equals('')">
+			and (name LIKE '%${searchName}%' or tel LIKE '%${searchName}%' or hope_item LIKE '%${searchName}%')
+			</if>
+		</if>
+		AND tbl_request.submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+		<if test="!order_by.equals('') and !sort_type.equals('')">
+		order by ${sort_type} ${order_by}
+		</if>
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	
+	<!-- 총갯수  -->
+	<select id="getRequestCount" parameterType="hashmap" resultType="hashmap">
+		SELECT count(*) as CNT from tbl_request where 1
+	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delRequestList" parameterType="hashmap">
+			DELETE from tbl_request where idx = '${idx}'
+	</delete>
+	
+	<!-- 개인정보 업데이트 -->
+	<update id="upRequestList" parameterType="hashmap">
+			UPDATE tbl_request
+				SET
+				tm_agree	= '${tm_agree}',
+				dm_agree 	= '${dm_agree}',
+				email_agree = '${email_agree}',
+				`condition` = '${act}'
+				WHERE 
+				idx = '${idx}'
+	</update> 
+</mapper>

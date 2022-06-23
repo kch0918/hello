@@ -1,0 +1,4 @@
+@font-face {
+  font-family: LGSmHaB;
+  src: local('/font/LGSmHaB.ttf'), url("localhost:8080/font/LGSmHaB.ttf") format("truetype");
+}

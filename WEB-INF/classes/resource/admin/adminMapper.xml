@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="/admin/adminMapper">
+	<select id="getBookmark" parameterType="hashmap" resultType="hashmap">
+		select * from bookmark where idx = '${login_idx}'
+	</select>
+	<update id="upBookmark" parameterType="hashmap">
+		update bookmark set bookmark = '${link}', title = '${tit}' where idx = '${login_idx}'
+	</update>
+	<insert id="insBookmark" parameterType="hashmap">
+		insert into bookmark (idx, bookmark, title) values('${login_idx}', '${link}', '${tit}')
+	</insert>
+	<select id="getContentCount" parameterType="hashmap" resultType="hashmap">
+		select count(*) as CNT from ${tb}, tbl_user where 1
+		AND ${tb}.user_idx = tbl_user.idx
+		<if test="search_type eq 'title'.toString()">
+			AND ${tb}.main_title LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'user'.toString()">
+			AND tbl_user.name LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			and (${tb}.main_title LIKE '%${search_name}%' or tbl_user.name LIKE '%${search_name}%')
+		</if>
+		<if test="!is_imsi.equals('')">
+			and ${tb}.is_imsi = '${is_imsi}'
+		</if>
+		<if test="!is_show.equals('')">
+			and ${tb}.is_show = '${is_show}'
+		</if>
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+	</select>
+	<select id="getContent" parameterType="hashmap" resultType="hashmap">
+		select ${tb}.*, tbl_user.name from ${tb}, tbl_user where 1
+		AND ${tb}.user_idx = tbl_user.idx
+		<if test="search_type eq 'title'.toString()">
+			AND ${tb}.main_title LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'user'.toString()">
+			AND tbl_user.name LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			and (${tb}.main_title LIKE '%${search_name}%' or tbl_user.name LIKE '%${search_name}%')
+		</if>
+		<if test="!is_imsi.equals('')">
+			and ${tb}.is_imsi = '${is_imsi}'
+		</if>
+		<if test="!is_show.equals('')">
+			and ${tb}.is_show = '${is_show}'
+		</if>
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+		
+		<!-- 공지사항의경우 상단고정 때문에 orderby 따로 적용 -->
+		<if test="tb.equals('tbl_notice'.toString())">
+			<if test="!order_by.equals('') and !sort_type.equals('')">
+		   		order by ${sort_type} ${order_by}
+		   	</if>
+			<if test="order_by.equals('') or sort_type.equals('')">
+		   		order by is_top = 'Y' desc, sort
+		   	</if>
+		</if>
+		<if test="!tb.equals('tbl_notice'.toString())">
+			<if test="!order_by.equals('') and !sort_type.equals('')">
+		   		order by ${sort_type} ${order_by}
+		   	</if>
+			<if test="order_by.equals('') or sort_type.equals('')">
+		   		order by sort
+		   	</if>
+		</if>
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	<select id="getContentRequestCount" parameterType="hashmap" resultType="hashmap">
+		select count(*) as CNT from tbl_request where 1
+		<if test="search_type eq 'user_name'.toString()">
+			AND name LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'user_tel'.toString()">
+			AND tel LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			and (name LIKE '%${search_name}%' or tel LIKE '%${search_name}%')
+		</if>
+		<!-- 선택 동의 -->
+		<if test="!tm_agree.equals('')">
+			and tbl_request.tm_agree = '${tm_agree}'
+		</if>
+		<if test="!dm_agree.equals('')">
+			and tbl_request.dm_agree = '${dm_agree}'
+		</if>
+		<if test="!email_agree.equals('')">
+			and tbl_request.email_agree = '${email_agree}'
+		</if>
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+	</select>
+	<select id="getContentRequest" parameterType="hashmap" resultType="hashmap">
+		select * from tbl_request where 1
+		<if test="search_type eq 'user_name'.toString()">
+			AND name LIKE '%${search_name}%'
+		</if>
+		<if test="search_type eq 'user_tel'.toString()">
+			AND tel LIKE '%${search_name}%'
+		</if>
+		<if test="search_type.equals('')">
+			and (name LIKE '%${search_name}%' or tel LIKE '%${search_name}%')
+		</if>
+		<!-- 선택 동의 -->
+		<if test="!tm_agree.equals('')">
+			and tbl_request.tm_agree = '${tm_agree}'
+		</if>
+		<if test="!dm_agree.equals('')">
+			and tbl_request.dm_agree = '${dm_agree}'
+		</if>
+		<if test="!email_agree.equals('')">
+			and tbl_request.email_agree = '${email_agree}'
+		</if>
+		AND submit_date BETWEEN '${start_date}000000' and '${finish_date}999999'
+		<if test="!order_by.equals('') and !sort_type.equals('')">
+	   		order by ${sort_type} ${order_by}
+	   	</if>
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	<select id="getContentFileName" parameterType="hashmap" resultType="hashmap">
+		select * from ${tb} where idx = '${idx}'
+	</select>
+	<select id="getCate1ByHope" parameterType="hashmap" resultType="string">
+		select group_concat(cate1) from tbl_cate where idx in (${hope_item_list})
+	</select>
+	<update id="upMBanner" parameterType="hashmap">
+		update tbl_mbanner
+		set
+		main_title = '${main_title}',
+		sub_title = '${sub_title}',
+		is_show = '${is_show}',
+		start_date = '${start_date}',
+		finish_date = '${finish_date}',
+		banner = '${banner}',
+		m_banner = '${m_banner}',
+		url = '${url}',
+		is_btn = '${is_btn}',
+		btn_nm = '${btn_nm}',
+		btn_link = '${btn_link}',
+		btn_pop = '${btn_pop}'
+		where
+		idx = '${idx}'
+	</update>
+	<update id="insMBanner" parameterType="hashmap">
+		insert into tbl_mbanner
+		set
+		main_title = '${main_title}',
+		sub_title = '${sub_title}',
+		is_show = '${is_show}',
+		start_date = '${start_date}',
+		finish_date = '${finish_date}',
+		banner = '${banner}',
+		m_banner = '${m_banner}',
+		url = '${url}',
+		is_btn = '${is_btn}',
+		btn_nm = '${btn_nm}',
+		btn_link = '${btn_link}',
+		btn_pop = '${btn_pop}',
+		sort = '999',
+		is_imsi = '${is_imsi}',
+		submit_date = now()+0,
+		user_idx = '${login_idx}'
+	</update>
+	
+	<insert id="insUserLog" parameterType="hashmap">
+		insert into tbl_user_log
+			set
+		id='${id}',
+		ip='${ip}',
+		result='${result}',
+		submit_date=now()+0,
+		way ='${way}'
+	
+	</insert>
+	
+	<update id="upPopup" parameterType="hashmap">
+		update tbl_popup
+		set
+		main_title = '${main_title}',
+		is_show = '${is_show}',
+		start_date = '${start_date}',
+		finish_date = '${finish_date}',
+		margin_top = '${margin_top}',
+		margin_left = '${margin_left}',
+		is_center = '${is_center}',
+		not_today = '${not_today}',
+		url = '${url}',
+		btn_pop = '${btn_pop}',
+		banner = '${banner}'
+		where
+		idx = '${idx}'
+	</update>
+	<update id="insPopup" parameterType="hashmap">
+		insert into tbl_popup
+		set
+		main_title = '${main_title}',
+		is_show = '${is_show}',
+		start_date = '${start_date}',
+		finish_date = '${finish_date}',
+		margin_top = '${margin_top}',
+		margin_left = '${margin_left}',
+		is_center = '${is_center}',
+		not_today = '${not_today}',
+		url = '${url}',
+		btn_pop = '${btn_pop}',
+		banner = '${banner}',
+		sort = '999',
+		is_imsi = '${is_imsi}',
+		submit_date = now()+0,
+		user_idx = '${login_idx}'
+	</update>
+	<update id="upPort" parameterType="hashmap">
+		update tbl_port
+		set
+		main_title = '${main_title}',
+		cate = '${cate}',
+		is_top = '${is_top}',
+		is_show = '${is_show}',
+		url = '${url}',
+		banner = '${banner}',
+		thumbnail = '${thumbnail}'
+		where
+		idx = '${idx}'
+	</update>
+	<update id="insPort" parameterType="hashmap">
+		insert into tbl_port
+		set
+		main_title = '${main_title}',
+		cate = '${cate}',
+		is_top = '${is_top}',
+		is_show = '${is_show}',
+		url = '${url}',
+		banner = '${banner}',
+		thumbnail = '${thumbnail}',
+		sort = '999',
+		is_imsi = '${is_imsi}',
+		submit_date = now()+0,
+		user_idx = '${login_idx}'
+	</update>
+	<update id="upNotice" parameterType="hashmap">
+		update tbl_notice
+		set
+		main_title = '${main_title}',
+		cate = '${cate}',
+		start_date = '${start_date}',
+		finish_date = '${finish_date}',
+		is_top = '${is_top}',
+		is_show = '${is_show}',
+		banner = '${banner}',
+		ori_banner = '${ori_banner}',
+		contents = '${contents}'
+		where
+		idx = '${idx}'
+	</update>
+	<update id="insNotice" parameterType="hashmap">
+		insert into tbl_notice
+		set
+		main_title = '${main_title}',
+		cate = '${cate}',
+		start_date = '${start_date}',
+		finish_date = '${finish_date}',
+		is_top = '${is_top}',
+		is_show = '${is_show}',
+		banner = '${banner}',
+		ori_banner = '${ori_banner}',
+		contents = '${contents}',
+		sort = '999',
+		is_imsi = '${is_imsi}',
+		submit_date = now()+0,
+		user_idx = '${login_idx}'
+	</update>
+	<update id="upAd" parameterType="hashmap">
+		update tbl_ad
+		set
+		cate = '${cate}',
+		banner = '${banner}',
+		m_banner = '${m_banner}',
+		is_show = '${is_show}'
+		where
+		idx = '${idx}'
+	</update>
+	<update id="insAd" parameterType="hashmap">
+		insert into tbl_ad
+		set
+		cate = '${cate}',
+		banner = '${banner}',
+		m_banner = '${m_banner}',
+		is_show = '${is_show}',
+		sort = '999',
+		submit_date = now()+0,
+		user_idx = '${login_idx}'
+	</update>
+	<update id="upSBanner" parameterType="hashmap">
+		update tbl_sbanner
+		set
+		main_title = '${main_title}',
+		description = '${description}',
+		is_show = '${is_show}',
+		start_date = '${start_date}',
+		finish_date = '${finish_date}',
+		banner = '${banner}',
+		m_banner = '${m_banner}',
+		is_btn = '${is_btn}',
+		btn_nm = '${btn_nm}',
+		btn_link = '${btn_link}',
+		btn_pop = '${btn_pop}'
+		where
+		idx = '${idx}'
+	</update>
+	<update id="insSBanner" parameterType="hashmap">
+		insert into tbl_sbanner
+		set
+		main_title = '${main_title}',
+		description = '${description}',
+		is_show = '${is_show}',
+		start_date = '${start_date}',
+		finish_date = '${finish_date}',
+		banner = '${banner}',
+		m_banner = '${m_banner}',
+		is_btn = '${is_btn}',
+		btn_nm = '${btn_nm}',
+		btn_link = '${btn_link}',
+		btn_pop = '${btn_pop}',
+		sort = '999',
+		is_imsi = '${is_imsi}',
+		submit_date = now()+0,
+		user_idx = '${login_idx}'
+	</update>
+	<select id="getContentOne" parameterType="hashmap" resultType="hashmap">
+		select * from ${tb} where idx = '${idx}'
+	</select>
+	<update id="changeStatus" parameterType="hashmap">
+		update ${tb}
+		set
+		is_show = '${act}'
+		where
+		idx = '${idx}'
+	</update>
+	<update id="changeStatusRequest" parameterType="hashmap">
+		update tbl_request
+		set
+		`condition` = '${act}'
+		where
+		idx = '${idx}'
+	</update>
+	<update id="changeStatusAdquest" parameterType="hashmap">
+		update tbl_adquest
+		set
+		`condition` = '${act}'
+		where
+		idx = '${idx}'
+	</update>
+	<delete id="delContent" parameterType="hashmap">
+		delete from ${tb} where idx in (${idx})
+	</delete>
+	<update id="setSort" parameterType="hashmap">
+		update ${tb} set sort = '${sort}' where idx = '${idx}'
+	</update>
+	<update id="upFakeCnt" parameterType="hashmap">
+		update tbl_fakecnt
+		set
+		won = '${resultWon}',
+		gun = '${resultGun}'
+		where won = '${prevWon}' and gun = '${prevGun}'
+	</update>
+	<select id="getAd" parameterType="hashmap" resultType="hashmap">
+		select * from tbl_ad order by sort
+	</select>
+	<select id="getFakeCnt" parameterType="hashmap" resultType="hashmap">
+		select * from tbl_fakecnt limit 1
+	</select>
+	
+	<select id="getUserLog" parameterType="hashmap" resultType="hashmap">
+		SELECT 
+			 DATE_FORMAT(submit_date,'%Y.%m.%d. %r') AS date,
+			 ip
+		FROM tbl_user_log WHERE id='${id}' AND result='S' ORDER BY idx DESC LIMIT 1
+	</select>
+	
+	
+	<select id="getUserListCount" parameterType="hashmap" resultType="hashmap">
+		select count(*) as CNT from tbl_user_log
+	</select>
+	
+	<select id="getUserList" parameterType="hashmap" resultType="hashmap">
+		select
+			 id,
+			 DATE_FORMAT(submit_date,'%Y.%m.%d. %r') AS submit_date,
+			 ip,
+			 result
+		 from tbl_user_log
+		<if test="!order_by.equals('') and !sort_type.equals('')">
+	   		order by ${sort_type} ${order_by}
+	   	</if>
+		<if test="order_by.equals('') or sort_type.equals('')">
+	   		order by idx
+	   	</if>
+	
+		limit #{s_rownum}, #{e_rownum}
+	</select>
+	
+	<!-- 광고문의 개인정보 -->
+	<update id="upAdquestList" parameterType="hashmap">
+			UPDATE tbl_adquest
+				SET
+				tm_agree	= '${tm_agree}',
+				dm_agree 	= '${dm_agree}',
+				email_agree = '${email_agree}',
+				`condition` = '${act}'
+				WHERE 
+				idx = '${idx}'
+	</update> 
+	
+	<insert id="addTblLog" parameterType="hashmap">
+		insert into tbl_log_info 
+			(
+				tbl, 		tbl_idx, 		tm_agree,
+				dm_agree,	email_agree,	con,		
+				way,		submit_date,	user_ip,
+				user_id
+			) 
+		values
+			(
+				'${tbl}', 		'${tbl_idx}', 		'${tm_agree}',
+				'${dm_agree}',	'${email_agree}',	'${condition}',	
+				'${way}',		now()+0,			'${user_ip}',
+				'${user_id}'
+			)
+	</insert>
+	
+	<select id="get_AdquestList" parameterType="hashmap" resultType="hashmap">
+		SELECT 
+			*,
+			case when date_format(DATE_ADD(submit_date, INTERVAL +1 YEAR),'%Y%m%d%H%m%s') > date_format(NOW(),'%Y%m%d%H%m%s')  then 0 ELSE 1 END AS over_chk
+		from tbl_adquest
+	</select>
+	
+	<select id="get_RequestList" parameterType="hashmap" resultType="hashmap">
+		SELECT 
+			*,
+			case when date_format(DATE_ADD(submit_date, INTERVAL +1 YEAR),'%Y%m%d%H%m%s') > date_format(NOW(),'%Y%m%d%H%m%s')  then 0 ELSE 1 END AS over_chk
+		from tbl_request
+	</select>
+	
+	<insert id="insSchedulTest" parameterType="hashmap">
+		insert into schedul_test 
+			(
+				submit_date
+			) 
+		values
+			(
+				now()+0
+			)
+	</insert>
+	
+	<delete id="yearAdquestDel" parameterType="hashmap">
+		delete from tbl_adquest where idx ='${idx}'
+	</delete>
+	
+	<delete id="yearRequestDel" parameterType="hashmap">
+		delete from tbl_request where idx ='${idx}'	
+	</delete>
+	
+	<select id="getPopupByPreview" parameterType="hashmap" resultType="hashmap">
+		select * from tbl_popup where idx in (${idx})
+	</select>
+	
+	<select id="getMBannerByPreview" parameterType="hashmap" resultType="hashmap">
+		select * from tbl_mbanner where idx in (${idx})
+	</select>
+	
+	
+	<select id="GetChkUserData" parameterType="hashmap" resultType="hashmap">
+		SELECT * FROM tbl_user_log WHERE idx = (SELECT MAX(idx) FROM tbl_user_log where result = 'S')
+	</select>
+	
+	<!-- 신한카드 -->
+	<delete id="delContent_sh" parameterType="hashmap">
+		delete from ${tb} where idx in (${idx})
+	</delete>
+	
+	<!-- 진행상태 변경 -->
+	<update id="changeStatusAdquest_sh" parameterType="hashmap">
+		update tbl_adquest_sh
+		set
+		`condition` = '${act}'
+		where
+		idx = '${idx}'
+	</update>
+	
+	<!-- 조회 및 수정 -->
+	<update id="upAdquestList_sh" parameterType="hashmap">
+			UPDATE tbl_adquest_sh
+				SET
+				tm_agree	= '${tm_agree}',
+				dm_agree 	= '${dm_agree}',
+				email_agree = '${email_agree}',
+				`condition` = '${act}'
+				WHERE 
+				idx = '${idx}'
+	</update> 
+	
+	<!-- 광고 트렌드 분섟 -->
+	<update id="upTrend" parameterType="hashmap">
+		update tbl_trend
+			set
+			main_title = '${main_title}',
+			cate = '${cate}',
+			is_top = '${is_top}',
+			is_show = '${is_show}',
+			url = '${url}',
+			banner = '${banner}',
+			ori_banner = '${ori_banner}',
+			thumbnail = '${thumbnail}',
+			contents  = '${contents}'
+		where
+			idx = '${idx}'
+	</update>
+	
+	<update id="insTrend" parameterType="hashmap">
+		insert into tbl_trend
+			set
+				main_title = '${main_title}',
+				cate = '${cate}',
+				is_top = '${is_top}',
+				is_show = '${is_show}',
+				url = '${url}',
+				banner = '${banner}',
+				ori_banner = '${ori_banner}',
+				thumbnail = '${thumbnail}',
+				sort = '999',
+				is_imsi = '${is_imsi}',
+				submit_date = now()+0,
+				user_idx = '${login_idx}',
+				contents  = '${contents}'
+	</update>
+</mapper>

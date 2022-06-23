@@ -1,0 +1,533 @@
+/* General Custom CSS */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700&display=swap');
+
+@font-face {
+  font-family: 'LGSmHaL';
+  font-style: normal;
+  font-weight: 100;
+  src: url(../font/LGSmHaL.eot);
+  src: local('LGSmHaL'),
+       url(/font/LGSmHaL.eot?#iefix) format('embedded-opentype'),
+       url(/font/LGSmHaL.woff) format('woff'),
+       url(/font/LGSmHaL.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'LGSmHaR';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/font/LGSmHaR.eot);
+  src: local('LGSmHaR'),
+       url(/font/LGSmHaR.eot?#iefix) format('embedded-opentype'),
+       url(/font/LGSmHaR.woff) format('woff'),
+       url(/font/LGSmHaR.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'LGSmHaSB';
+  font-style: bold;
+  font-weight: 700;
+  src: url(../font/LGSmHaSB.eot);
+  src: local('LGSmHaSB'),
+       url(/font/LGSmHaSB.eot?#iefix) format('embedded-opentype'),
+       url(/font/LGSmHaSB.woff) format('woff'),
+       url(/font/LGSmHaSB.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'LGSmHaB';
+  font-style: bold;
+  font-weight: 900;
+  src: url(/font/LGSmHaB.eot);
+  src: local('LGSmHaB'),
+       url(/font/LGSmHaB.eot?#iefix) format('embedded-opentype'),
+       url(/font/LGSmHaB.woff) format('woff'),
+       url(/font/LGSmHaB.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'URW DIN Light';
+  font-style: normal;
+  font-weight: 100;
+  src: url(/font/URWDIN-Light.eot);
+  src: local('URWDIN'),
+	   local('URW DIN'),
+       url(/font/URWDIN-Light.eot?#iefix) format('embedded-opentype'),
+       url(/font/URWDIN-Light.woff) format('woff'),
+       url(/font/URWDIN-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'URW DIN Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/font/URWDIN-Regular.eot);
+  src: local('URWDIN'),
+	   local('URW DIN'),
+       url(/font/URWDIN-Regular.eot?#iefix) format('embedded-opentype'),
+       url(/font/URWDIN-Regular.woff) format('woff'),
+       url(/font/URWDIN-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'URW DIN Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../font/URWDIN-Bold.eot);
+  src: local('URWDIN'),
+	   local('URW DIN'),
+       url(/font/URWDIN-Bold.eot?#iefix) format('embedded-opentype'),
+       url(/font/URWDIN-Bold.woff) format('woff'),
+       url(/font/URWDIN-Bold.ttf) format('truetype');
+}
+
+*{
+	font-family: 'Noto sans KR', sans-serif;
+	font-size:14px;
+	color:#333;
+	letter-spacing:-1px;
+	line-height:1.6;
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	word-break:keep-all;
+}
+html, body {
+	width:100%;
+	overflow-x:hidden;
+}
+img{
+	max-width:100%;
+	border:0;
+}
+a, a:hover, a:focus{
+	text-decoration:none;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+span, em, strong{
+	font-size:100%;
+	color:inherit;
+}
+ul, li, ol, dl {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+input, select, button {
+	appearance:none;
+	-webkit-appearance:none;
+	border:0;
+	outline:none;
+}
+input[type="text"]:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 100px #fff inset !important;
+    -moz-box-shadow: 0 0 0 100px #fff inset !important;
+    box-shadow: 0 0 0 100px #fff inset !important; 
+}
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance:none;
+	margin:0;
+}
+
+.lg-txt{
+	font-family: 'LGSmHaL', sans-serif !important;
+	letter-spacing:0;
+}
+.en-txt{
+	font-family: 'URW DIN', sans-serif !important;
+	letter-spacing:0;
+}
+.table {
+    display: Table;
+    width: 100%;
+    table-layout: fixed;
+}
+.dis-no {
+	display:none !important;
+}
+
+#main .talk {
+	display:none;
+}
+/*
+#ch-plugin .sc-ifAKCX {
+	position: absolute !important;
+	right: 172px !important;
+    bottom: 184px !important;
+}
+*/
+
+header {
+	position: absolute;
+	width:100%;
+	height: 92px;
+    padding: 30px 0;
+    z-index: 999;
+}
+header.on {
+	background:#fff;
+}
+header .container {
+    width: 100%;
+    max-width: 1260px;
+    margin: 0 auto;
+}
+header  {
+	/*border-top: 1px solid rgba(255,255,255, 0.3);*/
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+header .logo {
+	display:inline-block;
+	width : 260px;
+}
+header .ham_menu {
+	float: right;
+    margin-top: 6px;
+    cursor:pointer;
+}
+
+.gnb_wr {
+    position: absolute;
+    width: 100%;
+   	top: 92px;
+    left: 0;
+	background: #fff;
+	/*border-top:1px solid #e5e5e5;*/
+	display:none;
+}
+.gnb_wr > div {
+	position:relative;
+	max-width: 1260px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+.gnb_box{
+	display:table;
+	width:100%;
+	border-bottom:1px solid #e5e5e5;
+}
+.gnb_box + div + div {
+	border-bottom:0;
+}
+.gnb_box > div {
+	display:table-cell;
+	vertical-align:top;
+	padding:40px 0;
+}
+.gnb_tit {
+	width: 30%;
+    font-size: 22px;
+    color: #181818;
+    font-family: 'LGSmHaSB', sans-serif;
+	cursor:pointer;
+}
+
+.gnb_stit {
+
+}
+.gnb_stit > ul {
+	font-size:0;
+}
+.gnb_stit > ul > li {
+	display:inline-block;
+	width:25%;
+	vertical-align:top;
+	cursor:pointer;
+}
+.gnb_stit > ul > li > a {
+	font-size:18px;
+	color: #181818;
+	font-weight:500;
+}
+
+.btn_top {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background: #fff url('/img/web/img/btn_top.png')no-repeat center 12px;
+   	right: 3%;
+/*     bottom: 15%; */
+    bottom: 5%;
+    font-size: 14px;
+    color: #ed174d;
+    z-index: 997;
+    text-align: center;
+    padding: 20px 10px;
+    font-weight: 500;	
+	cursor:pointer;
+	display:none;
+	box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.03);
+}
+.btn_call {
+    position: fixed;
+    width: 50px;
+	height:50px;
+    right: 3.5%;
+/*     bottom: 13%; */
+    bottom: 5%;
+   	z-index: 999;
+   	display:none;
+}
+.btn_call > a {
+	display:block;
+	font-size:0;
+}
+.btn_call:before {
+	content:'';
+	position:absolute;
+	width:60px;
+	height:60px;
+	opacity: 0.2;
+    box-shadow: 0px 7px 36.6px 6.5px rgb(0 0 0 / 10%);
+    background-color: #272727;
+    z-index: -1;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation:scaleT 2s infinite;
+}
+div[data-ch-testid = 'launcher'] {
+	right: 3% !important;
+/*     bottom: 5% !important; */
+    bottom: 23.5% !important;
+}
+
+@keyframes scaleT {
+	0% {
+		transform: translate(-50%, -52%) scale(1);
+	}50% {
+		transform: translate(-50%, -52%) scale(1.1);
+	}100% {
+		transform: translate(-50%, -52%) scale(1);
+	}
+}
+/* footer */
+#footer {
+	padding:0;
+	border:0;
+}
+#footer .container {
+    max-width: 100%;
+	padding: 0;
+}
+#footer .widget {
+	padding:0;
+	margin:0 !important;
+}
+.foot_wr {
+
+}
+.foot_top {
+	width: 100%;
+    max-width: 100%;
+    height: 51px;
+    background: #bfe10e;
+}
+.foot_list {
+	position: relative;
+    max-width: 1216px;
+    margin: 0 auto;
+	padding:13px 0;
+}
+.foot_top ul {
+	float:right !important;
+	width:auto !important;
+}
+.foot_top ul > li {
+	display:inline-block;
+	margin-right:30px;
+}
+.foot_top ul > li:last-child {
+	margin-right:0;
+}
+.foot_top ul > li > a {
+	font-size:15px;
+	color:#000;
+}
+
+.foot_bt {
+	display: table;
+    width: 100%;
+	padding: 50px 30px;
+    border: 0;
+	background: #1d1f20;	
+}
+.foot_list2 {
+	position:relative;
+	max-width:1216px;
+	margin:0 auto;
+}
+.foot_list2 > div {
+	display: table-cell;
+    vertical-align: top;
+}
+.foot_left {
+	width: 321px;
+}
+.foot_left img {
+	max-width: 255px;
+}
+.foot_right {
+
+}
+.foot_info {
+	height: 150px;
+}
+.foot_info > ul {
+	display: inline-block;
+    width: 70% !important;
+    vertical-align: top;
+}
+.foot_info > ul > li {
+	position:relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 10px;
+    margin-right: 40px;
+}
+.foot_info > ul > li:nth-child(1):after, .foot_info > ul > li:nth-child(2):after {
+	content:'';
+	position:absolute;
+	width:1px;
+	height:13px;
+	top: 50%;
+    margin-top: -5px;
+    right: -20px;
+	background:rgba(255,255,255,0.5);
+}
+.foot_info .info_tit {
+	display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #fff;
+}
+.foot_info .info_stit {
+	display: inline-block;
+	font-size: 14px;
+    color: rgba(218, 218, 218, 0.7);
+}
+.foot_info .fam_box {
+	float: right;
+	display: inline-block;
+	vertical-align: top;
+	width: 174px;
+	padding: 10px 20px 0;
+	border: 1px solid #fff;
+}
+.foot_info .fam {
+	padding: 10px 0;
+	margin-top:-10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+	background:url('/img/web/img/arrow_foot.png')no-repeat right center;
+	background-size:10px 5px;
+	cursor:pointer;
+}
+.fam_list {
+	padding-bottom: 10px !important;
+	display:none;
+}
+.fam_list > li {
+
+}
+.fam_list > li > a {
+	font-size:13px;
+	color: rgba(255, 255, 255, 0.7);
+}
+.fam_list > li > a:hover {
+	color:#fff !important;
+}
+.foot_copy {
+	clear:both;
+}
+.foot_copy .copy {
+	display: inline-block;
+	font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: rgba(165, 165, 165, 0.7);
+	letter-spacing: 0;
+}
+.foot_copy .sns_wr {
+	float: right !important;
+    display: inline-block;
+    width: auto !important;
+	display:none !important;
+}
+.foot_copy .sns_wr > li {
+	display: inline-block;
+    vertical-align: middle;
+    margin-right: 25px;
+}
+.foot_copy .sns_wr > li:last-child {
+	margin-right:0;
+}
+.foot_copy .sns_wr > li > a {
+
+}
+.foot_copy .sns_wr > li:first-child img {
+	width:10px
+}
+.foot_copy .sns_wr > li:nth-child(2) img {
+	width:19px
+}
+.foot_copy .sns_wr > li:nth-child(3) img {
+	width:24px
+}
+
+
+/* 공통 */
+div[class*="half"] {
+	display:inline-block;
+	width:50%;
+}
+
+
+/* error */
+.error {
+	position:relative;
+	height:790px;
+	background:url('/img/404_bg.png')no-repeat center center;
+	background-size:cover;
+	text-align:center;
+}
+.error > a {
+	position:Absolute;
+	display:block;
+	left:0;
+	right:0;
+	margin: auto;
+	bottom:20%;
+}
+
+
+
+
+/*
+Desktop Styles
+================================================== */
+/* Note: Add new css to the media query below that you want to only effect the desktop view of your site */
+
+@media only screen and (min-width: 768px) {
+  /* Add your Desktop Styles here */
+
+}
+
+
+
+/*
+Mobile Styles
+================================================== */
+/* Note: Add new css to the media query below that you want to only effect the Mobile and Tablet Portrait view */
+
+@media only screen and (max-width: 767px) {
+  /* Add your Mobile Styles here */
+
+}
